@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Объектный Калькулятор</title>
+  <meta name="author" content="Ekaterina Tupii">
+    <meta charset="utf-8">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css ">
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+  <style> 
+    .btn-black { 
+	background-color:#000000; 
+	color:#FFFFFF; 
+	border-color:#000000;
+} 
+    
+    #result{
+        font-size:30px;
+      }
+  </style>
+</head>
+
+<body>
+    <div class="container">
+        <br>
+      <div class="input-group numbers" style="margin-bottom:5px">
+        <input style="border-radius:5px"  class="form-control" aria-describedby="basic-addon1" id="oper1" name="oper1" placeholder="Введите 1ое число">
+        <br>
+        <input style="border-radius:5px"  class="form-control" aria-describedby="basic-addon1" id="oper2" name="oper2" placeholder="Введите 2ое число">
+      </div>
+      
+        <select id="action" name="action">
+            <option value="0">Выберите действие</option>
+            <option value="1">Сложение</option>
+            <option value="2">Вычитание</option>
+            <option value="3">Умножение</option>
+            <option value="4">Деление</option>
+        </select>
+        <output id="result">Ответ:</output>
+      <p></p>
+        <button class="btn btn-black" onClick="simpleCalc.otvet()">Вычислить</button>
+        <br>
+
+    </div>
+    <script>
+        var Calculator = function() {
+            var operand1Int;
+            var operand2Int;
+            var result
+            var actionInt;
+
+            this.getOperand1 = function() {
+                return operand1Int;
+            };
+            this.getOperand2 = function() {
+                return operand2Int;
+            };
+            this.getAction = function() {
+                return actionInt;
+            };
+
+
+            this.setOperand1 = function() {
+                operand1Int = document.getElementById("oper1").value;
+                console.log(operand1Int);
+            };
+
+            this.setOperand2 = function() {
+                operand2Int = document.getElementById("oper2").value;
+                console.log(operand2Int);
+            };
+            this.setAction = function() {
+                var i = document.getElementById("action").options.selectedIndex;
+                actionInt = parseInt(document.getElementById("action").options[i].value);
+            };
+            this.add = function() {
+                operand1Int = parseInt(operand1Int);
+                operand2Int = parseInt(operand2Int);
+                return parseInt(operand1Int + operand2Int);
+            };
+            this.sub = function() {
+                operand1Int = parseInt(operand1Int);
+                operand2Int = parseInt(operand2Int);
+                return parseInt(operand1Int - operand2Int);
+            };
+            this.mult = function() {
+                operand1Int = parseInt(operand1Int);
+                operand2Int = parseInt(operand2Int);
+                return parseInt(operand1Int * operand2Int);
+            };
+            this.divis = function() {
+                operand1Int = parseInt(operand1Int);
+                operand2Int = parseInt(operand2Int);
+                if (operand2Int === 0) {
+                    return "На ноль делить нельзя!"
+                } else {
+                    return operand1Int / operand2Int
+                };
+            };
+            this.act = function() {
+                var start;
+                switch (actionInt) {
+                    case 1:
+                        start = this.add();
+                        break;
+                    case 2:
+                        start = this.sub();
+                        break;
+                    case 3:
+                        start = this.mult();
+                        break;
+                    case 4:
+                        start = this.divis();
+                        break;
+                };
+                return start;
+            };
+            this.otvet = function() {
+                this.setOperand1();
+                this.setOperand2();
+                this.setAction();
+                this.result = simpleCalc.act();
+                document.getElementById("result").innerHTML = this.result;
+
+            };
+        };
+
+        var simpleCalc = new Calculator();
+    </script>
+</body>
+
+</html>

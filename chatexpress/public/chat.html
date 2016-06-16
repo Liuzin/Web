@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>Express Chat</title>
+   <meta charset="utf-8">
+   <meta name="author" content="Ekaterina Tupii">
+     <style>
+     span {position:fixed; right:20px; top:10px;border:double; padding: 15px; border-radius:20px; width:30%;} p {border-radius: solid 1px silver}
+ </style>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+     <!-- Optional theme -->
+     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+     <!-- Latest compiled and minified JavaScript -->
+     <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+ <!-- <script>
+$(document).ready(function() {
+
+    $('#but').append('<input type="file" name="img" accept="image/jpeg,image/png,image/gif,image/jpg" class="btn btn-default">');
+})
+</script> -->
+     <script>
+     $(function(){
+       	var backs = [{"background":"green"}, {"background":"white"}];
+       	var socket = io();
+        socket.on('chat message push', function(msg){
+           $('div').append($('<p>').html(msg));
+        });
+
+        $("#b").on("click", function(){
+                 socket.emit('chat message', $('#i').val()); //послать сообщение серверной части
+                  $('#i').val('');
+           	});
+
+       $("#i").keydown(function(e) {
+          if(e.which === 13) {
+               socket.emit('chat message', $('#i').val()); //послать сообщение серверной части
+                $('#i').val('');
+            }
+          });
+
+     });
+
+  </script>
+ </head>
+ <body>
+    <h1>Содержимое чата:</h1>
+    <div></div>
+    <span><h2>Введите ссообщение:</h2>
+      <input id="i"><button id="b">Отправить</button></span>
+	  <footer>
+  <h5>©Liuzin Bender</h5>
+</footer>
+ </body>
+</html>

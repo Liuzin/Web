@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>Крамер</title>
+  <meta charset="utf-8">
+  <meta name="author" content="Ekaterina Tupii">
+   <script>
+     var result = {};
+     $(function Kram () {
+       $("button").on("click",function(){
+          $(this).html(document.title)
+       }) 
+       var x1 = $.query.get('x1') ||;
+       var y1 = $.query.get('y1') ||;
+       var z1 = $.query.get('z1') ||; 
+       var x2 = $.query.get('x2') ||; 
+       var y2 = $.query.get('y2') ||; 
+       var z2 = $.query.get('z2') ||;
+       var op1 = x1*y2 - y1*x2;
+       var op2 = z1*y2 - y1*z2;
+       var op3 = x1*z2 - z1*x2;
+       if x1/x2 = y1/y2 = z1/z2 {
+         result.kor1 = op2/op1; result.kor2 = op3/op1;
+       }else{
+         result = {"kor1":"NaN"};
+       }
+       document.title = JSON.stringify(result);
+     }
+   </script>
+ </head>
+ <body>
+<input type="number" min="0" max="6" step="0.1" id="x1" name="x1">x + <input type="number" min="0" max="6" step="0.1" id="y1" name="y1">y = <input type="number" min="0" max="6" step="0.1" id="z1" name="z1">
+
+   <p></p>
+<input type="number" min="0" max="6" step="0.1" id="x2" name="x2">x + <input type="number" min="0" max="6" step="0.1" id="y2" name="y2">y = <input type="number" min="0" max="6" step="0.1" id="z2" name="z2">
+   <hr>
+   <button> Вычислить </button>
+ </body>
+</html>
